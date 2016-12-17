@@ -10,8 +10,9 @@ router.get('/', function(req, res, next) {
 
 });
 
+
 //post router
-router.post('/send', function (req,res){
+router.post('/send', function (req,res,next){
   var transport = nodemailer.createTransport({
 //service and credentials
 service: 'Gmail',
@@ -25,8 +26,8 @@ auth: {
     to: 'nathananderson2003@yahoo.com',
     subject: 'Contact Form',
     //text version
-    text: 'You have a new message from' + req.body.name + '@nathansresume.com\n'+ 'Email:' + req.body.email + 'Message:'+ " " + req.body.message + 'Attachments:' + req.body.file,
-    html: '<h3>' + req.body.name +" "+ 'sent you have a new message !</h3><br/>' + 'Email:' + req.body.email + '<br/><br/>' + 'Message:' + req.body.message + 'Attachments:' + req.body.file, 
+    text: 'You have a new message from' + req.body.name + '@nathansresume.com\n'+ 'Email:' + req.body.email + 'Message:' + req.body.message,
+    html: '<h3>You have a new message !</h3><br/>From:' + req.body.name + '<br/><br/>' + 'Email:' + req.body.email + '<br/><br/>' + 'Message:' + req.body.message, 
   };
   transport.sendMail(mailOp,function(error,info){
     if(error){
@@ -39,5 +40,5 @@ auth: {
 
   });
 });
-
 module.exports = router;
+
